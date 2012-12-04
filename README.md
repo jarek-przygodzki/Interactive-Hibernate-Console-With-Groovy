@@ -24,3 +24,26 @@ mvn eclipse:eclipse
 
 Examples
 ========
+
+```groovy
+import org.hibernate.*
+
+
+sessionFactory = context.getBean 'sessionFactory'
+
+def transactionContext = { Session session, Closure c -> 
+    Transaction tx = session.beginTransaction();
+    try {
+        c()
+        tx.commit()
+     } catch (e) {
+        tx.rollback()
+        throw e
+     }
+ }
+ 
+ 
+transactionContext(sessionFactory.currentSession) { 
+    // within transaction
+}
+```
