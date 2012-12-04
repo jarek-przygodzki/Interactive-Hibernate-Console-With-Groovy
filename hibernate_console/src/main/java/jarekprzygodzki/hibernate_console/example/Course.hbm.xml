@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="jarekprzygodzki.hibernate_console.example.Course" table="COURSE">
+		<meta attribute="class-description">
+			Informacje o przedmiocie
+		</meta>
+		<id name="courseId" type="long" column="COURSE_ID">
+			<generator class="native" />
+		</id>
+		<property name="courseName" type="string" column="COURSE_NAME" />
+		<set name="students" inverse="true" table="STUDENT_COURSE">
+			<key column="COURSE_ID" />
+			<many-to-many column="STUDENT_ID" class="jarekprzygodzki.hibernate_console.example.Student" />
+		</set>
+
+	</class>
+</hibernate-mapping>

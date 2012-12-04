@@ -48,6 +48,11 @@
 			<value>false</value>
 		</property>
 		 -->
+		<property name="mappingLocations">
+			<list>
+				<value>classpath*:**/*.hbm.xml</value>
+			</list>
+		</property>		 
 	</bean>
 	<!--
 	<bean id="transactionManager"
