@@ -39,7 +39,8 @@ def transactionContext = { Session session, Closure c ->
         c(session)
         tx.commit()
      } catch (e) {
-        tx.rollback()
+        //Safe navigation operator
+        tx?.rollback()
         throw e
      }
  }
@@ -50,5 +51,33 @@ transactionContext(sessionFactory.currentSession) { session->
     Student s = new Student()
     s.studentName = 'John Doe'
     session.save(s)
+}
+```
+
+```groovy
+import org.hibernate.*
+
+import jarekprzygodzki.hibernate_console.example.*
+
+
+sessionFactory = context.getBean 'sessionFactory'
+
+def transactionContext = { Session session, Closure c -> 
+    Transaction tx = session.beginTransaction();
+    try {
+        c(session)
+        tx.commit()
+     } catch (e) {
+        tx?.rollback()
+        throw e
+     }
+ }
+
+
+transactionContext(sessionFactory.currentSession) { session->
+    // within transaction
+     def q = session.createQuery('from Student')
+     def students = q.list()
+     students.each { s-> println "[id=$s.studentId, name=$s.studentName]"}
 }
 ```
