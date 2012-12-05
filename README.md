@@ -3,7 +3,7 @@ Interactive Hibernate Console With Groovy
 
 Interactive Hibernate Console With Groovy And Spring
 
-![Screenshot](images/hibernate-groovy-console.png)
+![Screenshot](https://raw.github.com/jarek-przygodzki/Interactive-Hibernate-Console-With-Groovy/example/images/hibernate-groovy-console.png)
 
 Compile
 -------
